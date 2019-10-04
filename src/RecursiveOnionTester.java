@@ -22,5 +22,7 @@ public class RecursiveOnionTester {
 		catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+		RecursiveOnion onion1 = new RecursiveOnion(message);
+
 	}
 }
