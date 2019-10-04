@@ -1,4 +1,3 @@
-//Abby Zajac
 import java.util.Scanner;
 public class RecursiveOnionTester {
 	public static void main(String[] args) {

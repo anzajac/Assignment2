@@ -1,4 +1,4 @@
-//Abby Zajac
+
 public class RecursiveOnion {
 	private String message;
 	
