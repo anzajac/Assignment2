@@ -1,3 +1,5 @@
+//Assignment 2
+//Stephen Shea and Abigail Zajac
 import java.util.Scanner;
 public class RecursiveOnionTester {
 	public static void main(String[] args) {
@@ -10,13 +12,14 @@ public class RecursiveOnionTester {
 				message = scan.next();
 				if(message.equals("exit")) {
 					exitFlag = true;
-				}
-				else if(message.length() % 2 == 0) {
 					scan.close();
-					Exception e1 = new Exception("This is an even number of binary digits. Unacceptable!");
-					throw e1;
 				}
-				else {
+				else{
+					if(message.length() % 2 == 0) {
+						scan.close();
+						Exception e1 = new Exception("This is an even number of digits. Unacceptable!");
+						throw e1;
+					}
 					for(int i = 0; i < message.length(); i++) {
 						if(message.charAt(i) != '0' && message.charAt(i) != '1') {
 							scan.close();
@@ -24,13 +27,13 @@ public class RecursiveOnionTester {
 							throw e2;
 						}
 					}
-				}
-				if(!exitFlag) {
 					RecursiveOnion onion1 = new RecursiveOnion(message);
+					System.out.println(onion1.toString());
 				}
 			}
 			catch(Exception e) {
 				System.out.println(e.getMessage());
+				exitFlag = true;
 			}
 		}
 	}
