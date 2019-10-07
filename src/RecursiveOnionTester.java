@@ -25,7 +25,9 @@ public class RecursiveOnionTester {
 						}
 					}
 				}
-				RecursiveOnion onion1 = new RecursiveOnion(message);
+				if(!exitFlag) {
+					RecursiveOnion onion1 = new RecursiveOnion(message);
+				}
 			}
 			catch(Exception e) {
 				System.out.println(e.getMessage());
