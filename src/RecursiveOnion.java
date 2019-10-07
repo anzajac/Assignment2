@@ -1,22 +1,24 @@
-//Abby Zajac
+//Assignment 2
+//Stephen Shea and Abigail Zajac
+//Flips the digits of a binary number
 public class RecursiveOnion {
+	//Attributes
 	private String message;
 	
+	//Constructors
 	public RecursiveOnion(){
 		message = "0";
 		setMessage(recursiveReverse(message));
-		System.out.println(toString());
 	}
-	
 	public RecursiveOnion(String m) {
 		setMessage(recursiveReverse(m));
-		System.out.println(toString());
 	}
 	
+	
+	//toString and equals methods
 	public String toString() {
 		return message;
 	}
-	
 	public boolean equals(Object obj) {
 		if(this == obj) {
 			return true;
@@ -33,10 +35,12 @@ public class RecursiveOnion {
 		}
 	}
 	
+	//getter and setter methods
 	public void setMessage(String m) {
 		message = m;
 	}
 	
+	//helper method
 	private String reverseDigit(char d) {
 		if(d == '0') {
 			return "1";
@@ -46,6 +50,7 @@ public class RecursiveOnion {
 		}
 	}
 	
+	//recursive helper method for constructor
 	private String recursiveReverse(String m) {
 		int len = m.length();
 		String innerMessage;
