@@ -47,14 +47,14 @@ public class RecursiveOnion {
 	}
 	
 	private String recursiveReverse(String m) {
-		int len = message.length();
+		int len = m.length();
 		String innerMessage;
 		if(len == 1) {
-			return reverseDigit(message.charAt(0));
+			return reverseDigit(m.charAt(0));
 		}
 		else {
-			innerMessage = recursiveReverse(message.substring(1, len - 1));
-			return reverseDigit(message.charAt(0)) + innerMessage + reverseDigit(message.charAt(len - 1));
+			innerMessage = recursiveReverse(m.substring(1, len - 1));
+			return reverseDigit(m.charAt(0)) + innerMessage + reverseDigit(m.charAt(len - 1));
 		}
 	}
 }
