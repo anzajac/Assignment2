@@ -4,27 +4,31 @@
  * 10-11-19
  * CS208
  * 
- * This class contains a recursive method that takes a binary number which is secret & decodes to its flipped version
- * meaning all binary digits switched from 0 to 1 & vice versa
+ * This class contains a recursive method that takes a binary number (String) which is secret & decodes to its flipped version (int)
+ * meaning all binary digits switch from 0 to 1 & vice versa then changes binary number (int) from  
+ * recursiveReverse() to string
  * Also a helper method called reverseDigit() helps recursive method to flip the digits of a binary number
- * Otherwise the class has the regular initiation of toString(), equals(), getter & setter methods
+ * Plus the class has the regular overriding of toString() & equals() 
  */
+import java.lang.Math;
 public class RecursiveOnion {
 	//class attributes
 	private String message;
-	private String secret;
+	private int len;
 	
 	//class constructors
 	//default
 	public RecursiveOnion(){
 		message = "0";
-		secret = "0";
-		setMessage(recursiveReverse(message));
+		int m = Integer.parseInt(message);
+		len = 1;
+		setBinToString(recursiveReverse(m, len));
 	}
 	//with parameter
 	public RecursiveOnion(String m) {
-		secret = m;
-		setMessage(recursiveReverse(m));
+		int bin = Integer.parseInt(m);
+		len = m.length();
+		setBinToString(recursiveReverse(bin, len));
 	}
 	
 	
@@ -32,7 +36,7 @@ public class RecursiveOnion {
 	//toString method to return formatted info on each RecursiveOnion
 	@Override
 	public String toString() {
-		return "Encryted message (" + secret + ") is decryted as " + message;
+		return message;
 	}
 	//equals method to ensure inputed object is RecursiveOnion object
 	@Override
@@ -45,43 +49,61 @@ public class RecursiveOnion {
 		}
 		if(obj instanceof RecursiveOnion) {
 			RecursiveOnion onion = (RecursiveOnion) obj;
-			return message.equals(onion.message) && 
-					secret.equals(onion.secret);
+			return message.equals(onion.message);
 		}
 		else {
 			return false;
 		}
 	}
 	
-	//getter and setter methods
-	public void setMessage(String m) {
-		message = m;
-	}
-	
-	public String getSecret() {
-		return secret;
+	//main methods
+	//sets any binary number that is integer to string
+	public String setBinToString(int m) {
+		String bin = "" + m;
+		while(len > bin.length()) {
+			bin = "0" + bin;
+		}
+		message = bin;
+		return message;
 	}
 	
 	//helper method
-	private String reverseDigit(char d) {
-		if(d == '0') {
-			return "1";
+	private int reverseDigit(int d) {
+		if(d == 0) {
+			return 1;
 		}
 		else {
-			return "0";
+			return 0;
 		}
 	}
 	
 	//recursive method for constructor
-	private String recursiveReverse(String m) {
-		int len = m.length();
-		String innerMessage;
+	private int recursiveReverse(int m, int len) {
+		//constant 10
+		int ten = 10;
+		//final binary number
+		int bin = 0;
+		//leading binary digit
+		int digit1 = 0;
+		//trailing binary number
+		int digit2 = 0;
+		//base case
 		if(len == 1) {
-			return reverseDigit(m.charAt(0));
+			return reverseDigit(m);
 		}
+		//recursive case
 		else {
-			innerMessage = recursiveReverse(m.substring(1, len - 1));
-			return reverseDigit(m.charAt(0)) + innerMessage + reverseDigit(m.charAt(len - 1));
+			digit1 = m / (int)(Math.pow(ten, len-1));
+			digit2 = m % ten;
+			if(digit1 == 1) {
+				m-= (int)(Math.pow(ten, len-1));
+			}
+			m/= 10;
+			bin = recursiveReverse(m, len-2);
 		}
+		bin*= ten;
+		bin+= reverseDigit(digit2);
+		bin+= reverseDigit(digit1) * (int)(Math.pow(ten, len-1));
+		return bin;
 	}
 }
